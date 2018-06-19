@@ -2,67 +2,65 @@
 
 
 {% block content %}
+ <body style="background-color: #0984e3;color: white;">
     <div class="col-xl-10 offset-md-1">
-        <div class="Order-list">
+        <div class="container">
             <div class="card">
-                <div class="card-header">
-                     <h4>{{ user|title }} Payments History : </h4>
-                </div>
-                <div class="card-body">
-                    <div class="alert alert-info"> <b>Hello {{ user|title }}, </b>Below is your payments history!</div>
-                    <hr>
-                    <div class="table-responsive">
-                        <table class="table table-striped table-bordered table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Payment ID</th>
-                                    <th>Full Name</th>
-                                    <th>Student</th>
-                                    <th>Group</th>
-                                    <th>Due Date</th>
-                                    <th>Amount</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            {% if hasStudent %}
-                                {% for payment in current_user_payments %}
-                                    <tr>
-                                      <td>#{{ payment.id }}</td>
-                                      <td>{{ payment.firstName }} {{ payment.lastName }}</td>
-                                      <td>{{ payment.student }}</td>
-                                      <td>{{ payment.group }}</td>
-                                      <td>{{ payment.due_date}}</td>
-                                      <td>
-                                        <label class="badge badge-pill badge-danger">
-                                            ${{ payment.group.training.price }}</td>
-                                        </label>
-                                      </td>
-                                      {% if payment.status == "P" %}
-                                          <td><span class="badge badge-pill badge-success"> Payment complete </span></td>
-                                      {% else %}
-                                          <td><span class="badge badge-pill badge-danger"> Waiting for payment </span></td>
-                                      {% endif %}
-                                    </tr>
-                                {% endfor %}
-                            {% endif %}
-                            </tbody>
-                        </table>
-                    </div>
-                    {% if not hasStudent %}
-                        <h6 style="text-align: center;">This account is not linked to any student!</h6>
-                    {% endif %}
-                    {% if not current_user_payments %}
-                        {% if hasStudent %}
-                            <h6 style="text-align: center;">No payments to show in payments history.</h6>
-                        {% endif %}
-                    {% endif %}
+                <div class="container-fluied">
+                    <p class="h4">
+                        <b>Hello username, </b>Below is your payments history!</p>
+                    <table class="table table-striped table-hover table-bordered table-responsive" style="color: black">
+                        <tdead>
+                            <tr class="info">
+                                <td>Payment ID</td>
+                                <td>Full Name</td>
+                                <td>Student</td>
+                                <td>Group</td>
+                                <td>Due Date</td>
+                                <td>Amount</td>
+                                <td>Status</td>
+                            </tr>
+                        </tdead>
+                        <tbody>
+                            <tr>
+                                <td>#{{ payment.id }}</td>
+                                <td>{{ payment.firstName }} {{ payment.lastName }}</td>
+                                <td>{{ payment.student }}</td>
+                                <td>{{ payment.group }}</td>
+                                <td>{{ payment.due_date}}</td>
+                                <td>
+                                ${{ payment.group.training.price }}</td>
+                                </td>
+                                {% if payment.status == "P" %}
+                                <td class="success">
+                                     Payment complete </span>
+                                </td>
+                                {% else %}
+                                <td class="danger">
+                                 Waiting for payment 
+                                </td>
+                                {% endif %}
 
-                    <div class="alert alert-warning">All above details are related to user email <b>{{ user.email}}</b> , if you need help with anything please call +386(0)49454929 or email us at info@j-coders.com</b>
-                    </div>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                {% if not hasStudent %}
+                <div class="alert alert-danger">
+                    <h6 style="text-align: center;">this account is not linked to any student!</h6>
+                </div>
+                {% endif %} {% if not current_user_payments %} {% if hasStudent %}
+                <div class="alert alert-warning">
+                    <h6 style="text-align: center;">No payments to show in payments history.</h6>
+                </div>
+                {% endif %} {% endif %}
+
+                <div class="alert alert-info">All above details are related to user email
+                    <b> user.email</b> , if you need help witd anytding please call +386(0)49454929 or email us at info@j-coders.com</b>
                 </div>
             </div>
         </div>
-        <!-- ORDER LIST END-->
     </div>
+    <!-- ORDER LIST END-->
+</body>
 {% endblock content %}
