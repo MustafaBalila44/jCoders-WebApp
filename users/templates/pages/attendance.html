@@ -2,34 +2,33 @@
 
 
 {% block content %}
-    <div class="col-xl-10 offset-md-1">
-        <div class="Order-list">
+
+<div class="col-xl-10 offset-md-1">
+        <div class="container">  
             <div class="card">
-                <div class="card-header">
-                     <h4>{{ user|title }} Attendances History : </h4>
-                </div>
                 <div class="card-body">
-                    <div class="alert alert-info"> <b>Hello {{ user|title }}, </b>Below is your attendance history!</div>
-                    <hr>
+                        <p class="h4"> <b>Hello username, </b>Below is your attendance history!</p>
+                    
                     <div class="table-responsive">
-                        <table class="table table-striped table-bordered table-hover">
+                        <table class="table table-striped table-hover table-bordered" style="color: black">
                             <thead>
-                                <tr>
+                                <tr class="info">
                                     <th>Student</th>
                                     <th>Date</th>
+                                    <th>Status</th>
                                     <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
-                            {% if hasStudent %}
+                             {% if hasStudent %} 
                                 {% for attendance in current_user_attendances %}
                                     <tr>
                                       <td>{{ attendance.student.name }} {{ attendance.student.lastname }}</td>
                                       <td>{{ attendance.date}}</td>
                                       {% if attendance.status == "1" %}
-                                          <td><span class="badge badge-pill badge-success"> Attended </span></td>
+                                          <td class="success"><span class="badge badge-pill badge-success"> Attended </span></td>
                                       {% else %}
-                                          <td><span class="badge badge-pill badge-danger"> Didn't attend </span></td>
+                                          <td class="danger"><span class="badge badge-pill badge-danger"> Didn't attend </span></td>
                                       {% endif %}
                                     </tr>
                                 {% endfor %}
@@ -38,19 +37,22 @@
                         </table>
                     </div>
                     {% if not hasStudent %}
+                    <div class="alert alert-danger">
                         <h6 style="text-align: center;">This account is not linked to any student!</h6>
-                    {% endif %}
+                    </div>
+                         {% endif %} 
                     {% if not current_user_attendances %}
                         {% if hasStudent %}
+                        <div class="alert alert-warning">
                             <h6 style="text-align: center;">No attendances to show in attendances history.</h6>
-                        {% endif %}
+                        </div>
+                            {% endif %}
                     {% endif %}
 
-                    <div class="alert alert-warning">All above details are related to user email <b>{{ user.email}}</b> , if you need help with anything please call +386(0)49454929 or email us at info@j-coders.com</b>
+                    <div class="alert alert-info">All above details are related to user email <b>{{ user.email}}</b> , if you need help with anything please call +386(0)49454929 or email us at info@j-coders.com</b>
                     </div>
                 </div>
             </div>
         </div>
         <!-- ORDER LIST END-->
-    </div>
-{% endblock content %}
+</div>
